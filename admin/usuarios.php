@@ -29,7 +29,7 @@
                     <th>Nombre</th>
                     <th>Email</th>
                     <th>Opciones
-                        <a href="crearUsuario.php"><i class="fas fa-plus"></i></a>
+                        <a href="panel.php?modulo=crearUsuario"><i class="fas fa-plus"></i></a>
                     </th>
                   </tr>
                   </thead>
