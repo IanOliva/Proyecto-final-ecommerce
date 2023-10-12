@@ -1,3 +1,26 @@
+<?php
+include_once "DBecommerce.php";
+$conexion = mysqli_connect($host,$user,$password,$db);
+
+if (isset($_REQUEST['idborrar'])) {
+   $id= mysqli_real_escape_string($conexion,$_REQUEST['idborrar']??'');
+   $query="DELETE from usuarios WHERE id='".$id."';";
+   $res=mysqli_query($conexion,$query);
+   if ($res) {
+    ?><div class="alert alert-warning float-right" role="alert">
+        Usuario eliminado exitosamente
+      </div>
+    <?php  
+   }else {
+    ?><div class="alert alert-warning float-right" role="alert">
+        Error al eliminar usuario <?php echo mysqli_error($conexion);?>
+      </div>
+    <?php  
+   }
+}
+
+?>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -19,7 +42,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">DataTable with minimal features & hover style</h3>
+                <h3 class="card-title">Detalles de Usuarios administradores</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -47,8 +70,8 @@ while ($row= mysqli_fetch_assoc($res)) {
     <td><?php echo $row['nombre']?></td>
     <td><?php echo $row['email']?></td>
     <td class="text-center">
-        <a href="editarUsuario.php?id=<?php echo $row['id']?>" class="btn btn-small btn-warning"> <i class="fas fa-edit"></i></a>
-        <a href="usuarios.php?idborrar=<?php echo $row['id']?>" class="btn btn-small btn-danger"> <i class="fas fa-trash"></i></a>
+        <a href="panel.php?modulo=editarUsuario&id=<?php echo $row['id']?>" class="btn btn-small btn-warning"> <i class="fas fa-edit"></i></a>
+        <a href="panel.php?modulo=usuarios&idborrar=<?php echo $row['id']?>" class="btn btn-small btn-danger eliminar"> <i class="fas fa-trash"></i></a>
     </td>
    
   </tr>
@@ -75,3 +98,5 @@ while ($row= mysqli_fetch_assoc($res)) {
     </section>
     <!-- /.content -->
   </div>
+
+  
