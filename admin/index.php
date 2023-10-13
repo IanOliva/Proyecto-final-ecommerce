@@ -58,7 +58,7 @@
                         <input type="email" class="form-control" placeholder="Email" name="email">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
+                                <span class="bi bi-envelope-fill"></span>
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                         <input type="password" class="form-control" placeholder="Password" name="pass">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                                <span class="bi bi-key-fill"></span>
                             </div>
                         </div>
                     </div>
