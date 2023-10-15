@@ -188,18 +188,27 @@ $modulo = $_REQUEST['modulo'] ?? '';
         if ($modulo == "usuarios") {
             include_once "usuarios.php";
         }
-        if ($modulo == "productos") {
-            include_once "productos.php";
-        }
-        if ($modulo == "ventas") {
-            include_once "ventas.php";
-        }
         if ($modulo == "crearUsuario") {
             include_once "crearUsuario.php";
         }
         if ($modulo == "editarUsuario") {
             include_once "editarUsuario.php";
         }
+        if ($modulo == "productos") {
+            include_once "productos.php";
+        }
+        if ($modulo == "crearProducto") {
+            include_once "crearProducto.php";
+        }
+        if ($modulo == "editarProducto") {
+            include_once "editarProducto.php";
+        }
+
+        if ($modulo == "ventas") {
+            include_once "ventas.php";
+        }
+       
+
 
         ?>
 
@@ -267,7 +276,7 @@ $modulo = $_REQUEST['modulo'] ?? '';
         $(document).ready(function () {
             $(".eliminar").click(function (e) {
                 e.preventDefault();
-                var res = confirm("¿Estas seguro de eliminar el usuario?");
+                var res = confirm("¿Estas seguro de eliminar el registro?");
                 if (res == true) {
                     var link = $(this).attr("href");
                     window.location = link;
