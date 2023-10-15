@@ -28,7 +28,7 @@ if (isset($_REQUEST['idborrar'])) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Usuarios</h1>
+            <h1>Productos</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -41,7 +41,7 @@ if (isset($_REQUEST['idborrar'])) {
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Detalles de Usuarios administradores</h3>
+                <h3 class="card-title">Detalles de Productos</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -49,10 +49,9 @@ if (isset($_REQUEST['idborrar'])) {
                   <thead>
                   <tr>
                     <th>Nombre</th>
-                    <th>Email</th>
-                    <th>Opciones
-                        <a href="panel.php?modulo=crearUsuario"><i class="fas fa-plus"></i></a>
-                    </th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th><a href="panel.php?modulo=crearUsuario"><i class="fas fa-plus"></i></a></th>    
                   </tr>
                   </thead>
                   <tbody>
@@ -61,7 +60,7 @@ if (isset($_REQUEST['idborrar'])) {
 <?php
 include_once "DBecommerce.php";
 $conexion=mysqli_connect($host,$user,$password,$db);
-$query="SELECT id,email,nombre FROM usuarios;";
+$query="SELECT id,nombre,precio,stock FROM productos;";
 $res=mysqli_query($conexion,$query);
 
 
@@ -69,7 +68,8 @@ while ($row= mysqli_fetch_assoc($res)) {
     ?>
     <tr>
     <td><?php echo $row['nombre']?></td>
-    <td><?php echo $row['email']?></td>
+    <td><?php echo $row['precio']?></td>
+    <td><?php echo $row['stock']?></td>
     <td class="text-center">
         <a href="panel.php?modulo=editarUsuario&id=<?php echo $row['id']?>" class="btn btn-small btn-warning"> <i class="fas fa-edit"></i></a>
         <a href="panel.php?modulo=usuarios&idborrar=<?php echo $row['id']?>" class="btn btn-small btn-danger eliminar"> <i class="fas fa-trash"></i></a>
