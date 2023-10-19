@@ -26,11 +26,9 @@ if (isset($_REQUEST['idborrar'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
+          <div>
             <h1>Productos</h1>
-          </div>
-        </div>
+          </div>        
       </div><!-- /.container-fluid -->
     </section>
 
@@ -45,7 +43,7 @@ if (isset($_REQUEST['idborrar'])) {
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
+                <table id="tablaProductos" class="table table-bordered table-hover">
                   <thead>
                   <tr>
                     <th>Nombre</th>
@@ -76,6 +74,7 @@ while ($row= mysqli_fetch_assoc($res)) {
     </td>
    
   </tr>
+  </tbody>
 <?php
 }
 ?>
@@ -100,4 +99,3 @@ while ($row= mysqli_fetch_assoc($res)) {
     <!-- /.content -->
   </div>
 
-  

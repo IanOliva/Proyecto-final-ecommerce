@@ -7,12 +7,10 @@
     <title> Proyecto ecommerce</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
+    
+    
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <!-- bootstrap -->
@@ -62,22 +60,19 @@
                 <form method="post">
 
                     <div class="input-group mb-3">
-
+                    <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
                         <input type="text" class="form-control" placeholder="Email" aria-label="Email"
                             aria-describedby="basic-addon1" name="email" required>
-                        <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                        
                     </div>
 
 
                     <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
                         <input type="password" class="form-control" placeholder="Password" aria-label="contraseña" name="pass" required>
-
-
-                        <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
-
                     </div>
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-primary btn-block" name="login">Sign In</button>
+                        <button type="submit" class="btn btn-primary btn-block" name="login">Ingresar</button>
                     </div>
             </div>
         </div>
@@ -106,10 +101,8 @@
     </div>
     <!-- /.login-box -->
 
-    <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+   
+    
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
     <!-- bootstrap -->

@@ -41,7 +41,7 @@ $row=mysqli_fetch_assoc($res);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Editar Usuario</h1>
+            <h1>Editar Producto</h1>
           </div>
         
         </div>

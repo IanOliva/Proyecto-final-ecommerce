@@ -45,7 +45,7 @@ if (isset($_REQUEST['idborrar'])) {
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
+                <table id="tablaUsuarios" class="table table-bordered table-hover display">
                   <thead>
                   <tr>
                     <th>Nombre</th>
@@ -76,6 +76,7 @@ while ($row= mysqli_fetch_assoc($res)) {
     </td>
    
   </tr>
+  </tbody>
 <?php
 }
 ?>
