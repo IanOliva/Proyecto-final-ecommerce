@@ -7,21 +7,33 @@ $nombre=mysqli_real_escape_string($conexion,$_REQUEST['nombre']??'');
 $precio=mysqli_real_escape_string($conexion,$_REQUEST['precio']??'');
 $stock=mysqli_real_escape_string($conexion,$_REQUEST['stock']??'');
 
-
-$query="INSERT INTO productos (nombre,precio,stock) VALUES ('".$nombre."','".$precio."','".$stock."')";
+if ($_FILES["imagenes"]) {
+  $nombre_base = basename($_FILES["imagenes"]["name"]);
+  $nombre_final = date("d-m-y"). "-" . date("h-i-s"). "-". $nombre_base; //distinguir imagenes
+  $ruta = "archivos/" . $nombre_final;
+  $subirarchivo = move_uploaded_file($_FILES["imagenes"]["tmp_name"], $ruta);
+  if ($subirarchivo) {
+    $query="INSERT INTO productos (nombre,precio,stock,imagenes) VALUES ('".$nombre."','".$precio."','".$stock."','".$ruta."')";
 $res=mysqli_query($conexion,$query);
 if ($res) {
     echo '<meta http-equiv="refresh" content="0; url=panel.php?modulo=productos&mensaje=Producto Creado correctamente" />';
 }else {
     ?>
-    <div class="alert alert-danger" role="alert">
-        Error al crear producto <?php echo mysqli_error($conexion);?>
-    </div>
+<div class="alert alert-danger" role="alert">
+    Error al crear producto <?php echo mysqli_error($conexion);?>
+</div>
 <?php
 }
     
 }
+
+
+}
+
+}
 ?>
+
+
 
 
 
@@ -30,64 +42,70 @@ if ($res) {
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6 text-center">
-            <h1>Crear Producto</h1>
-          </div>
-        
-        </div>
-      </div><!-- /.container-fluid -->
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6 text-center">
+                    <h1>Crear Producto</h1>
+                </div>
+
+            </div>
+        </div><!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-6">
-            <div class="card">
-              
-              <!-- /.card-header -->
-              <div class="card-body">
-                    <form action="panel.php?modulo=crearProducto" method="post">
-                        
-                        <div class="form-group">
-                            <label>Nombre</label>
-                            <input type="text" name="nombre" class="form-control" required>
-                            <small id="helpId" class="text-muted">Nombre sin numeros</small>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <form action="panel.php?modulo=crearProducto" method="post" enctype="multipart/form-data">
+
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" name="nombre" class="form-control" required>
+                                    <small id="helpId" class="text-muted">Nombre sin numeros</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Precio</label>
+                                    <input type="number" name="precio" class="form-control" required>
+                                    <small id="helpId" class="text-muted">Precio unitario del producto</small>
+                                </div>
+                                <div class="form-group">
+                                    <label>stock</label>
+                                    <input type="number" name="stock" class="form-control" required>
+                                    <small id="helpId" class="text-muted">Cantidad existente</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Imagenes</label>
+                                    <input type="file" name="imagenes" class="form-control-file" required>
+                                    <small id="helpId" class="form-text text-muted">Imagenes del producto</small>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" name="guardar">Guardar</button>
+                                </div>
+                            </form>
+
                         </div>
 
-                        <div class="form-group">
-                            <label>Precio</label>
-                            <input type="number" name="precio" class="form-control" required>
-                            <small id="helpId" class="text-muted">Precio unitario del producto</small>
-                        </div>
-                        <div class="form-group">
-                            <label>stock</label>
-                            <input type="number" name="stock" class="form-control" required>
-                            <small id="helpId" class="text-muted">Cantidad existente</small>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary" name="guardar">Guardar</button>
-                        </div>
-                    </form>
 
-              </div>
-                 
-                  
-                  
-                </table>
-              </div>
-              <!-- /.card-body -->
+
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
             </div>
-            <!-- /.card -->
-
-          </div>
-          <!-- /.col -->
+            <!-- /.col -->
         </div>
         <!-- /.row -->
-      </div>
-      <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
+</div>
+<!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>

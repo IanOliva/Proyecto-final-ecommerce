@@ -49,6 +49,7 @@ if (isset($_REQUEST['idborrar'])) {
                     <th>Nombre</th>
                     <th>Precio</th>
                     <th>Stock</th>
+                    <th>Imagenes</th>
                     <th><a href="panel.php?modulo=crearProducto"><i class="fas fa-plus"></i></a></th>    
                   </tr>
                   </thead>
@@ -58,7 +59,7 @@ if (isset($_REQUEST['idborrar'])) {
 <?php
 include_once "DBecommerce.php";
 $conexion=mysqli_connect($host,$user,$password,$db);
-$query="SELECT id,nombre,precio,stock FROM productos;";
+$query="SELECT id,nombre,precio,stock,imagenes FROM productos;";
 $res=mysqli_query($conexion,$query);
 
 
@@ -68,6 +69,7 @@ while ($row= mysqli_fetch_assoc($res)) {
     <td><?php echo $row['nombre']?></td>
     <td><?php echo $row['precio']?></td>
     <td><?php echo $row['stock']?></td>
+    <td><?php echo $row['imagenes']; ?></td>
     <td class="text-center">
         <a href="panel.php?modulo=editarProducto&id=<?php echo $row['id']?>" class="btn btn-small btn-warning"> <i class="fas fa-edit"></i></a>
         <a href="panel.php?modulo=productos&idborrar=<?php echo $row['id']?>" class="btn btn-small btn-danger eliminar"> <i class="fas fa-trash"></i></a>

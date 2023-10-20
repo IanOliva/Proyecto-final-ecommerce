@@ -20,20 +20,22 @@ $modulo = $_REQUEST['modulo'] ?? '';
     <title>Admin | Dashboard</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <!-- <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
 
-    <!-- bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-
-
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- iCheck -->
@@ -48,6 +50,9 @@ $modulo = $_REQUEST['modulo'] ?? '';
     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+
+    <!-- datatable -->
+    
 
 
 </head>
@@ -89,12 +94,7 @@ $modulo = $_REQUEST['modulo'] ?? '';
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#"
-                        role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
-                </li>
+                
             </ul>
         </nav>
 
@@ -179,11 +179,14 @@ $modulo = $_REQUEST['modulo'] ?? '';
             ?>
 
 
+      
         <div class="alert alert-primary alert-dismissible fade show float-right m-2" role="alert">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
             <?php echo $_REQUEST['mensaje'] ?>
         </div>
-
 
 
 
@@ -246,7 +249,8 @@ $modulo = $_REQUEST['modulo'] ?? '';
     <script>
     $.widget.bridge('uibutton', $.ui.button)
     </script>
-
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- ChartJS -->
     <script src="plugins/chart.js/Chart.min.js"></script>
     <!-- Sparkline -->
@@ -268,13 +272,13 @@ $modulo = $_REQUEST['modulo'] ?? '';
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>
 
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.js"></script>
+
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="dist/js/pages/dashboard.js"></script>
 
-    <!-- bootstrap 5 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
+
 
 
 
@@ -293,13 +297,8 @@ $modulo = $_REQUEST['modulo'] ?? '';
         })
     });
     </script>
-    <!-- alerta eliminable -->
-    <script>
-    var alertList = document.querySelectorAll('.alert');
-    alertList.forEach(function(alert) {
-        new bootstrap.Alert(alert)
-    })
-    </script>
+    
+   
 
 
 
