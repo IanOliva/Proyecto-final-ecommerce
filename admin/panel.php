@@ -51,7 +51,7 @@ $modulo = $_REQUEST['modulo'] ?? '';
     <!-- summernote -->
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
 
-    <!-- datatable -->
+    
     
 
 
