@@ -173,6 +173,33 @@
                     </ul>
                 </nav>
                 <!-- /.navbar -->
+                <div class="row mt-2">
+                    <?php 
+                        include_once "admin/DBecommerce.php";
+                        $conexion=mysqli_connect($host,$user,$password,$db);
+                        $query="SELECT id,nombre,precio,stock,imagenes FROM productos";
+                        $res=mysqli_query($conexion,$query);
+                        while ($row=mysqli_fetch_assoc($res)) {
+
+                            $path= "admin/".$row['imagenes']; //ubicacion de las imagenes
+                        ?>
+                        <div class="col-4">
+                            <div class="card border-primary">
+                              <img class="card-img-top img-thumbnail" src="<?php echo $path?>" alt="">
+                              <div class="card-body">
+                                <h4 class="card-title "><?php echo $row ['nombre'] ?> </h4>
+                                <p class="card-text"><strong>Precio: </strong><?php echo $row ['precio'] ?></p>
+                                <p class="card-text"><strong>Stock: </strong><?php echo $row ['stock'] ?> </p>
+                                <a class="btn btn-primary" href="#" role="button"></a>
+                              </div>
+                            </div>
+                        </div>
+                        
+                        <?php
+                        }
+                     ?>
+                    
+                </div>
             </div>
         </div>
 

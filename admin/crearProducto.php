@@ -11,6 +11,7 @@ if ($_FILES["imagenes"]) {
   $nombre_base = basename($_FILES["imagenes"]["name"]);
   $nombre_final = date("d-m-y"). "-" . date("h-i-s"). "-". $nombre_base; //distinguir imagenes
   $ruta = "archivos/" . $nombre_final;
+  
   $subirarchivo = move_uploaded_file($_FILES["imagenes"]["tmp_name"], $ruta);
   if ($subirarchivo) {
     $query="INSERT INTO productos (nombre,precio,stock,imagenes) VALUES ('".$nombre."','".$precio."','".$stock."','".$ruta."')";
