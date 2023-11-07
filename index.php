@@ -31,13 +31,13 @@
 </head>
 
 <body>
-    
-    <?php 
-    include_once "admin/DBecommerce.php"; 
-    $conexion = mysqli_connect($host,$user,$password,$db);
+
+    <?php
+    include_once "admin/DBecommerce.php";
+    $conexion = mysqli_connect($host, $user, $password, $db);
     ?>
-    
-    
+
+
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -65,8 +65,9 @@
                                 <form class="form-inline" action="index.php">
                                     <div class="input-group input-group-sm">
                                         <input class="form-control form-control-navbar" type="search"
-                                            placeholder="Search" aria-label="Search" name="nombre" value="<?php echo $_REQUEST['nombre']??'';?>">
-                                            <input type="hidden" name="modulo" value="productos">
+                                            placeholder="Search" aria-label="Search" name="nombre"
+                                            value="<?php echo $_REQUEST['nombre'] ?? ''; ?>">
+                                        <input type="hidden" name="modulo" value="productos">
                                         <div class="input-group-append">
                                             <button class="btn btn-navbar" type="submit">
                                                 <i class="fas fa-search"></i>
@@ -82,12 +83,12 @@
 
                         <!-- Messages Dropdown Menu -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link" data-toggle="dropdown" href="#">
-                                <i class="fa fa-cart-plus"></i>
-
-                                <span class="badge badge-danger navbar-badge">3</span>
+                            <a class="nav-link" data-toggle="dropdown" href="#" id="iconoCarrito">
+                                <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                <span class="badge badge-danger navbar-badge" id="badgeProducto"></span>
+                                
                             </a>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="listaCarrito">
                                 <a href="#" class="dropdown-item">
                                     <!-- Message Start -->
                                     <div class="media">
@@ -106,44 +107,7 @@
                                     </div>
                                     <!-- Message End -->
                                 </a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item">
-                                    <!-- Message Start -->
-                                    <div class="media">
-                                        <img src="admin/dist/img/user8-128x128.jpg" alt="User Avatar"
-                                            class="img-size-50 img-circle mr-3">
-                                        <div class="media-body">
-                                            <h3 class="dropdown-item-title">
-                                                John Pierce
-                                                <span class="float-right text-sm text-muted"><i
-                                                        class="fas fa-star"></i></span>
-                                            </h3>
-                                            <p class="text-sm">I got your message bro</p>
-                                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!-- Message End -->
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item">
-                                    <!-- Message Start -->
-                                    <div class="media">
-                                        <img src="admin/dist/img/user3-128x128.jpg" alt="User Avatar"
-                                            class="img-size-50 img-circle mr-3">
-                                        <div class="media-body">
-                                            <h3 class="dropdown-item-title">
-                                                Nora Silvester
-                                                <span class="float-right text-sm text-warning"><i
-                                                        class="fas fa-star"></i></span>
-                                            </h3>
-                                            <p class="text-sm">The subject goes here</p>
-                                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!-- Message End -->
-                                </a>
+                               
                                 <div class="dropdown-divider"></div>
                                 <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
                             </div>
@@ -180,36 +144,36 @@
                     </ul>
                 </nav>
                 <!-- /.navbar -->
-               <?php 
-               $modulo=$_REQUEST['modulo']??''; 
-                if ($modulo=='productos' || $modulo =="") {
+                <?php
+                $modulo = $_REQUEST['modulo'] ?? '';
+                if ($modulo == 'productos' || $modulo == "") {
                     include_once "productosTienda.php";
                 }
                 if ($modulo == "detalleproducto") {
                     include_once "detalleproducto.php";
                 }
-               ?> 
-        </div> 
+                ?>
+            </div>
 
-    </div>
-
-
-    <!-- jQuery -->
-    <script src="admin/plugins/jquery/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="admin/plugins/jquery-ui/jquery-ui.min.js"></script>
-
-    <!-- Bootstrap 4 -->
-    <script src="admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- daterangepicker -->
-    <script src="admin/plugins/moment/moment.min.js"></script>
-    <script src="admin/plugins/daterangepicker/daterangepicker.js"></script>
-
-    <!-- AdminLTE App -->
-    <script src="admin/dist/js/adminlte.js"></script>
+        </div>
 
 
+        <!-- jQuery -->
+        <script src="admin/plugins/jquery/jquery.min.js"></script>
+        <!-- jQuery UI 1.11.4 -->
+        <script src="admin/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+        <!-- Bootstrap 4 -->
+        <script src="admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- daterangepicker -->
+        <script src="admin/plugins/moment/moment.min.js"></script>
+        <script src="admin/plugins/daterangepicker/daterangepicker.js"></script>
+
+        <!-- AdminLTE App -->
+        <script src="admin/dist/js/adminlte.js"></script>
+
+        <script src="admin/js/ecommerce.js"></script>
 </body>
 
 </html>
