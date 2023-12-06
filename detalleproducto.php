@@ -90,8 +90,10 @@ $path = "admin/" . $rowProducto['imagenes'];
                     <button class="btn btn-primary btn-lg btn-flat" id="agregarCarrito"
                         data-id="<?php echo $_REQUEST['id'] ?>" 
                         data-nombre="<?php echo $rowProducto['nombre'] ?>"
-                        data-path="<?php echo $path ?>">
-
+                        data-path="<?php echo $path ?>"
+                        data-precio="<?php echo $rowProducto['precio'] ?>"
+                        >
+                        
 
 
                         <i class="fas fa-cart-plus fa-lg mr-2"></i>

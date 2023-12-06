@@ -13,7 +13,8 @@
             "id"=>$_REQUEST['id'],
             "nombre"=>$_REQUEST['nombre'],
             "path"=>$_REQUEST['path'],
-            "cantidad"=>$_REQUEST['cantidad']
+            "cantidad"=>$_REQUEST['cantidad'],
+            "precio"=>$_REQUEST['precio']
         ];
         array_push($productos,$nuevo);
     }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tienda |</title>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -66,7 +66,7 @@
                                     <div class="input-group input-group-sm">
                                         <input class="form-control form-control-navbar" type="search"
                                             placeholder="Search" aria-label="Search" name="nombre"
-                                            value="<?php echo $_REQUEST['nombre'] ?? ''; ?>">
+                                            value="<?php echo $_REQUEST['nombre'] ?? '';?>">
                                         <input type="hidden" name="modulo" value="productos">
                                         <div class="input-group-append">
                                             <button class="btn btn-navbar" type="submit">
@@ -81,36 +81,17 @@
                             </div>
                         </li>
 
-                        <!-- Messages Dropdown Menu -->
+                        <!-- carrito Dropdown Menu -->
                         <li class="nav-item dropdown">
                             <a class="nav-link" data-toggle="dropdown" href="#" id="iconoCarrito">
                                 <i class="fa fa-cart-plus" aria-hidden="true"></i>
                                 <span class="badge badge-danger navbar-badge" id="badgeProducto"></span>
-                                
+
                             </a>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="listaCarrito">
-                                <a href="#" class="dropdown-item">
-                                    <!-- Message Start -->
-                                    <div class="media">
-                                        <img src="admin/dist/img/user1-128x128.jpg" alt="User Avatar"
-                                            class="img-size-50 mr-3 img-circle">
-                                        <div class="media-body">
-                                            <h3 class="dropdown-item-title">
-                                                Brad Diesel
-                                                <span class="float-right text-sm text-danger"><i
-                                                        class="fas fa-star"></i></span>
-                                            </h3>
-                                            <p class="text-sm">Call me whenever you can...</p>
-                                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!-- Message End -->
-                                </a>
-                               
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+
                             </div>
+
                         </li>
                         <!-- Notifications Dropdown Menu -->
                         <li class="nav-item dropdown">
@@ -151,6 +132,9 @@
                 }
                 if ($modulo == "detalleproducto") {
                     include_once "detalleproducto.php";
+                }
+                if ($modulo == "carrito") {
+                    include_once "carrito.php";
                 }
                 ?>
             </div>
