@@ -13,6 +13,51 @@ $(document).ready(function () {
     url: "ajax/leerCarrito.php",
     dataType: "json",
     success: function (response) {
+      llenarTablaPasarela(response);
+    },
+  });
+
+  function llenarTablaPasarela(response) {
+    $("#tablaPasarela tbody").text("");
+    var TOTAL = 0;
+    response.forEach((element) => {
+      var precio = parseFloat(element["precio"]);
+      var totalProd = element["cantidad"] * element["precio"];
+      TOTAL = TOTAL + totalProd;
+
+      $("#tablaPasarela tbody").append(
+        `
+                <tr>
+                    <td><img src="${element["path"]}" class="img-size-50"/></td>
+                    <td>${element["nombre"]}</td>
+
+                   
+                    <td> ${element["cantidad"]}</td>
+                    
+
+                    <td>$${precio.toFixed(2)}</td>
+                    <td>$${totalProd.toFixed(2)}</td>
+                    
+                <tr>
+                `
+      );
+    });
+    $("#tablaPasarela tbody").append(
+      `
+            <tr>
+                <td colspan="4" class="text-right"><strong>Total:</strong></td>
+                <td>$${TOTAL.toFixed(2)}</td>
+               
+            <tr>
+            `
+    );
+  }
+
+  $.ajax({
+    type: "post",
+    url: "ajax/leerCarrito.php",
+    dataType: "json",
+    success: function (response) {
       llenarTablaCarrito(response);
     },
   });
@@ -177,4 +222,28 @@ $(document).on("click",".borrarProd",function(e){
       },
     });
   });
+});
+
+
+
+var nombrerec = $("#nombrerec").val();
+var emailrec = $("#emailrec").val();
+var direccionrec = $("#direccionrec").val();
+
+
+
+$("#obtener").click(function(e){
+    var nombrecli = $("#nombrecli").val();
+    var emailcli = $("#emailcli").val();
+    var direccioncli = $("#direccioncli").val();
+
+    if ($(this).prop("checked")==true) {
+        $("#nombrerec").val(nombrecli);
+        $("#emailrec").val(emailcli);
+        $("#direccionrec").val(direccioncli);
+    }else{
+      $("#nombrerec").val(nombrerec);
+      $("#emailrec").val(emailrec);
+      $("#direccionrec").val(direccionrec);
+    }
 });

@@ -13,3 +13,5 @@
            
         </tbody>
 </table>
+<a class="btn btn-warning" href="index.php?modulo=productos" role="button">Agregar mas productos</a>
+<a class="btn btn-success float-right" href="index.php?modulo=envio" role="button">Siguiente</a>
