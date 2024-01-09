@@ -35,7 +35,7 @@
                     session_start();
                     $email = $_REQUEST['email'] ?? '';
                     $pass = $_REQUEST['pass'] ?? '';
-                    // $pass = md5($pass);
+                    $pass = md5($pass);
                     include_once "admin/DBecommerce.php";
                     $conexion = mysqli_connect($host, $user, $password, $db);
                     $query = "SELECT id,email,nombre,apellido,telefono FROM clientes where email='" . $email . "' and pass='" . $pass . "'";

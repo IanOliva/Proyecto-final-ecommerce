@@ -31,8 +31,12 @@ $(document).ready(function () {
                     <td><img src="${element["path"]}" class="img-size-50"/></td>
                     <td>${element["nombre"]}</td>
 
-                   
-                    <td> ${element["cantidad"]}</td>
+                    <td> ${element["cantidad"]}
+                        <input type="hidden" name="id[]" value="${element['id']}">
+                        <input type="hidden" name="cantidad[]" value="${element['cantidad']}">
+                        <input type="hidden" name="precio[]" value="${precio.toFixed(2)}">
+                    </td>
+                    
                     
 
                     <td>$${precio.toFixed(2)}</td>
@@ -226,24 +230,27 @@ $(document).on("click",".borrarProd",function(e){
 
 
 
-var nombrerec = $("#nombrerec").val();
-var emailrec = $("#emailrec").val();
-var direccionrec = $("#direccionrec").val();
 
 
 
-$("#obtener").click(function(e){
-    var nombrecli = $("#nombrecli").val();
-    var emailcli = $("#emailcli").val();
-    var direccioncli = $("#direccioncli").val();
 
-    if ($(this).prop("checked")==true) {
-        $("#nombrerec").val(nombrecli);
-        $("#emailrec").val(emailcli);
-        $("#direccionrec").val(direccioncli);
-    }else{
-      $("#nombrerec").val(nombrerec);
-      $("#emailrec").val(emailrec);
-      $("#direccionrec").val(direccionrec);
-    }
-});
+var nombreRec=$("#nombreRec").val();
+var emailRec=$("#emailRec").val();
+var direccionRec=$("#direccionRec").val();
+
+    $("#obtener").click(function (e) { 
+        var nombreCli=$("#nombreCli").val();
+        var emailCli=$("#emailCli").val();
+        var direccionCli=$("#direccionCli").val();
+
+        if( $(this).prop("checked")==true ){
+            $("#nombreRec").val(nombreCli);
+            $("#emailRec").val(emailCli);
+            $("#direccionRec").val(direccionCli);
+        }else{
+            $("#nombreRec").val(nombreRec);
+            $("#emailRec").val(emailRec);
+            $("#direccionRec").val(direccionRec);
+        }
+
+    });

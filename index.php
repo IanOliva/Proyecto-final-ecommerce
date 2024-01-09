@@ -38,7 +38,9 @@
 </head>
 
 <body>
-
+ <!-- jQuery -->
+ <script src="admin/plugins/jquery/jquery.min.js"></script>
+ 
     <?php
     include_once "admin/DBecommerce.php";
     $conexion = mysqli_connect($host, $user, $password, $db);
@@ -67,6 +69,9 @@
                 }
                 if ($modulo == "pasarela") {
                     include_once "pasarela.php";
+                }
+                if( $modulo=="factura" ){
+                    include_once "factura.php";
                 }        
                 ?>
             </div>
@@ -74,8 +79,7 @@
         </div>
 
 
-        <!-- jQuery -->
-        <script src="admin/plugins/jquery/jquery.min.js"></script>
+       
         <!-- jQuery UI 1.11.4 -->
         <script src="admin/plugins/jquery-ui/jquery-ui.min.js"></script>
 
