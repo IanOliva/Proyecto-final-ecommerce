@@ -135,6 +135,9 @@ if ($_SESSION['id_cliente']) {
 
             </tbody>
         </table>
+
+        <a id="" class="btn btn-secondary float-right" target="_blank" href="imprimirFactura.php?idVenta=<?php echo $idVenta ?>" role="button"><i class="fa fa-file" aria-hidden="true"></i> Ver factura</a>
+
         <?php
         }
 
