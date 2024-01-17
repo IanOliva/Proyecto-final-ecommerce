@@ -13,7 +13,7 @@ if (isset($_REQUEST['idborrar'])) {
     <?php  
    }else {
     ?><div class="alert alert-danger float-right" role="alert">
-        Error al eliminar usuario <?php echo mysqli_error($conexion);?>
+        Error al eliminar producto <?php echo mysqli_error($conexion);?>
       </div>
     <?php  
    }

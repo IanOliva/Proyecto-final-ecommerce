@@ -121,9 +121,9 @@ $rowVenta=mysqli_fetch_assoc($resVenta);
     include_once"dompdf/autoload.inc.php"; 
     use Dompdf\Dompdf;
     $pdf=new Dompdf();
-    $pdf->load_html($html);
+    $pdf->loadhtml($html);
     $pdf->setPaper("A4","landingscape");
     $pdf->render();
-    $pdf->stream();
+    $pdf->stream("Factura");
     
     ?>
