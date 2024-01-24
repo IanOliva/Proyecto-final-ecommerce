@@ -45,7 +45,7 @@ if ($res) {
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6 text-center">
+                <div class="col-12 text-center">
                     <h1>Crear Producto</h1>
                 </div>
 
@@ -57,7 +57,7 @@ if ($res) {
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-6">
+                <div class="col-6 m-auto">
                     <div class="card">
 
                         <!-- /.card-header -->

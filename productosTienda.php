@@ -32,7 +32,7 @@
 
                             $path= "admin/".$row['imagenes']; //ubicacion de las imagenes
                         ?>
-                        <div class="col-4">
+                        <div class="col-4 text-dark">
                             <div class="card border-primary">
                               <img class="card-img-top img-thumbnail" src="<?php echo $path?>" alt="">
                               <div class="card-body">
@@ -52,8 +52,8 @@
                 <?php
                 if($totalPaginas>0){
                 ?>
-                    <nav aria-label="Page navigation">
-                      <ul class="pagination">
+                    <nav aria-label="Page navigation ">
+                      <ul class="pagination d-flex justify-content-center">
                         <?php
                             if( $paginaSel!=1 ){
                         ?>

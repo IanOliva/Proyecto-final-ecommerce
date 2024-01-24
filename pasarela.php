@@ -19,17 +19,12 @@
 
 
 
-<div class="mt-3">
-    <h4>Terminos y condiciones</h4>
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima, soluta non quibusdam, assumenda mollitia expedita
-    nihil quisquam sapiente optio rem reiciendis voluptatum laborum eos consectetur obcaecati sint incidunt doloribus
-    placeat!
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima, soluta non quibusdam, assumenda mollitia expedita
-    nihil quisquam sapiente optio rem reiciendis voluptatum laborum eos consectetur obcaecati sint incidunt doloribus
-    placeat!
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima, soluta non quibusdam, assumenda mollitia expedita
-    nihil quisquam sapiente optio rem reiciendis voluptatum laborum eos consectetur obcaecati sint incidunt doloribus
-    placeat!
+<div class="mt-3 text-center">
+    <h4>Atención</h4>
+    <p>Luego de confirmar el pedido recuerde realizar su pago a la cuenta bancaria que aparece en la factura
+        y enviar el comprobante con el ID de pedido a la siguiente dirección de email <strong>ecommerce@gmail.com </strong>una vez recibido el comprobante 
+        se armara el pedido y se avisara cuando este listo para retirar. Muchas gracias!
+    </p>
    
 </div>
 <div class="mt-3">

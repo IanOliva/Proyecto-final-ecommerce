@@ -10,9 +10,7 @@ if ($_SESSION['id_cliente']) {
         $resVenta = mysqli_query($conexion, $queryVenta);
         $id = mysqli_insert_id($conexion);
 
-        // if ($resVenta) {
-        //     echo "El pedido a sido confirmado con el id = " .$id;
-        // }
+        
     }
 
     $insertaDetalle = "";
@@ -28,6 +26,9 @@ if ($_SESSION['id_cliente']) {
     $resDetalle = mysqli_query($conexion, $queryDetalle);
     if ($resVenta && $resDetalle) {
         ?>
+        <div class="container">
+            <h1 class="display-1 text-center">¡Gracias por tu compra!</h1>
+        </div>
         <div class="row">
             <div class="col-6">
                 <?php muestraRecibe($id); ?>
@@ -57,9 +58,9 @@ if ($_SESSION['id_cliente']) {
     }
     function muestraRecibe($idVenta){
     ?>
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
-            <tr>
+            <tr class="table-info">
                 <th colspan="3" class="text-center">Persona que recibe</th>
             </tr>
             <tr>
@@ -88,10 +89,10 @@ if ($_SESSION['id_cliente']) {
     }
     function muestraDetalle($idVenta){
         ?>
-        <table class="table">
+        <table class="table table-bordered">
             <thead>
-                <tr>
-                    <th colspan="3" class="text-center">Detalle de venta</th>
+                <tr class="table-info">
+                    <th colspan="4" class="text-center">Detalle de venta</th>
                 </tr>
                 <tr>
                     <th>Nombre</th>
@@ -122,15 +123,15 @@ if ($_SESSION['id_cliente']) {
                 <tr>
                     <td><?php echo $row['nombre'] ?></td>
                     <td><?php echo $row['cantidad'] ?></td>
-                    <td><?php echo $row['precio'] ?></td>
-                    <td><?php echo $row['subTotal'] ?></td>
+                    <td><?php echo number_format($row['precio'],2) ?></td>
+                    <td><?php echo number_format($row['subTotal'],2) ?></td>
                 </tr>
                 <?php
                     }
                 ?>
                 <tr>
-                    <td colspan="3" class="text-right">Total:</td>
-                    <td><?php echo $total; ?></td>
+                    <td colspan="3" class="text-right"><strong>Total:</strong></td>
+                    <td><strong>$<?php echo number_format($total,2); ?></strong></td>
                 </tr>
 
             </tbody>

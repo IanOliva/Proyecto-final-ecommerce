@@ -61,17 +61,17 @@ if ($_SESSION['id_cliente']) {
                     <div class="form-group">
                         <label for="">Nombre</label>
                         <input type="text" name="nombreRec" id="nombreRec" class="form-control"
-                            value="<?php echo $rowRec['nombre'] ?>">
+                            value="<?php echo $rowRec['nombre']??'' ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="">Email</label>
                         <input type="email" name="emailRec" id="emailRec" class="form-control"
-                            value="<?php echo $rowRec['email'] ?>">
+                            value="<?php echo $rowRec['email']??'' ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="">Direccion</label>
                         <textarea name="direccionRec" id="direccionRec" class="form-control"
-                            row="3"><?php echo $rowRec['direccion'] ?></textarea>
+                            row="3"><?php echo $rowRec['direccion']??'' ?> </textarea>
                     </div>
                     <div class="form-check">
                         <label class="form-check-label">

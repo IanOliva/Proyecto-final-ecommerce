@@ -51,10 +51,6 @@ $modulo = $_REQUEST['modulo'] ?? '';
     <!-- summernote -->
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
 
-    
-    
-
-
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -94,10 +90,11 @@ $modulo = $_REQUEST['modulo'] ?? '';
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-                
+
             </ul>
         </nav>
 
+        
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -127,16 +124,15 @@ $modulo = $_REQUEST['modulo'] ?? '';
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+
                         <li class="nav-item menu-open">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-shopping-cart"></i>
-                                <p>
-                                    Ecommerce
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
+
+                                <p> Ecommerce</p>
+
                             </a>
+
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="panel.php?modulo=estadisticas"
@@ -168,6 +164,7 @@ $modulo = $_REQUEST['modulo'] ?? '';
                                 </li>
 
                             </ul>
+                        </li>
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
@@ -179,7 +176,7 @@ $modulo = $_REQUEST['modulo'] ?? '';
             ?>
 
 
-      
+
         <div class="alert alert-primary alert-dismissible fade show float-right m-2" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -219,7 +216,7 @@ $modulo = $_REQUEST['modulo'] ?? '';
         if ($modulo == "ventas") {
             include_once "ventas.php";
         }
-       
+
 
 
         ?>
@@ -229,7 +226,7 @@ $modulo = $_REQUEST['modulo'] ?? '';
             <strong>Proyecto Ecommerce Oliva Ian.</strong>
 
             <div class="float-right d-none d-sm-inline-block">
-                <b>Tecnicatura Universitaria en programacion/sistemas</b>
+                <b>Tecnicatura Universitaria en programación</b>
             </div>
         </footer>
 
@@ -297,8 +294,8 @@ $modulo = $_REQUEST['modulo'] ?? '';
         })
     });
     </script>
-    
-   
+
+
 
 
 

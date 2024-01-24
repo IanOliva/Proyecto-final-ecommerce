@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="scroll-behavior:smooth;">
 
 <head>
     <meta charset="UTF-8">
@@ -38,48 +38,118 @@
 </head>
 
 <body>
- <!-- jQuery -->
- <script src="admin/plugins/jquery/jquery.min.js"></script>
- 
+    <!-- jQuery -->
+    <script src="admin/plugins/jquery/jquery.min.js"></script>
+
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__shake" src="admin/imagenes/logo ian.png" alt="Logo ecommerce" height="60" width="60">
+    </div>
+
     <?php
     include_once "admin/DBecommerce.php";
     $conexion = mysqli_connect($host, $user, $password, $db);
     ?>
 
 
+
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <?php
-                include_once "menu.php";
+
+        <div class="col-12">
+            <?php
+            include_once "menu.php";
+            ?>
+            <?php
+            $mensaje = $_REQUEST['mensaje'] ?? '';
+            if ($mensaje) {
                 ?>
+                <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <?php echo $mensaje; ?>
+                </div>
                 <?php
-                $modulo = $_REQUEST['modulo'] ?? '';
-                if ($modulo == 'productos' || $modulo == "") {
-                    include_once "productosTienda.php";
-                }
-                if ($modulo == "detalleproducto") {
-                    include_once "detalleproducto.php";
-                }
-                if ($modulo == "carrito") {
-                    include_once "carrito.php";
-                }
-                if ($modulo == "envio") {
-                    include_once "envio.php";
-                }
-                if ($modulo == "pasarela") {
-                    include_once "pasarela.php";
-                }
-                if( $modulo=="factura" ){
-                    include_once "factura.php";
-                }        
-                ?>
+            }
+            ?>
+            <?php
+            $modulo = $_REQUEST['modulo'] ?? '';
+            if ($modulo == 'productos' || $modulo == "") {
+                include_once "productosTienda.php";
+            }
+            if ($modulo == "detalleproducto") {
+                include_once "detalleproducto.php";
+            }
+            if ($modulo == "carrito") {
+                include_once "carrito.php";
+            }
+            if ($modulo == "envio") {
+                include_once "envio.php";
+            }
+            if ($modulo == "pasarela") {
+                include_once "pasarela.php";
+            }
+            if ($modulo == "factura") {
+                include_once "factura.php";
+            }
+            if ($modulo == "cliente") {
+                include_once "cliente.php";
+            }
+            ?>
+        </div>
+
+        <?php
+        if ($modulo == 'productos' || $modulo == "") {
+            ?>
+            <div class="card text-dark m-auto col-8" id="contacto">
+                <div class="card-body row">
+                    <div class="col-5 text-center d-flex align-items-center justify-content-center">
+                        <div class="">
+                            <h2><strong>Ecommerce</strong></h2>
+                            <p class="lead mb-5">Buenos Aires, Argentina<br>
+                                Tel: +1 234 56789012
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-7">
+                        <div class="form-group">
+                            <label for="inputName">Nombre</label>
+                            <input type="text" id="inputName" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail">E-Mail</label>
+                            <input type="email" id="inputEmail" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSubject">Asunto</label>
+                            <input type="text" id="inputSubject" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="inputMessage">Mensaje</label>
+                            <textarea id="inputMessage" class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Send message">
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
+            <?php
+
+        }
+
+        ?>
+        <div class="container fixed-bottom">
+            <div class="bg-primary text-center mt-2 col-12 ">
+                <p class="m-0">Proyecto Ecommerce Oliva Ian</p>
+            </div>
         </div>
 
 
-       
+
         <!-- jQuery UI 1.11.4 -->
         <script src="admin/plugins/jquery-ui/jquery-ui.min.js"></script>
 
@@ -94,6 +164,7 @@
         <script src="admin/dist/js/adminlte.js"></script>
 
         <script src="admin/js/ecommerce.js"></script>
+    </div>
 </body>
 
 </html>

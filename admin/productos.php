@@ -40,6 +40,7 @@ if (isset($_REQUEST['idborrar'])) {
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Detalles de Productos</h3>
+                <a class="float-right" href="panel.php?modulo=crearProducto">Agregar Producto <i class="fas fa-plus"></i></a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -50,7 +51,7 @@ if (isset($_REQUEST['idborrar'])) {
                     <th>Precio</th>
                     <th>Stock</th>
                     <th>Imagenes</th>
-                    <th><a href="panel.php?modulo=crearProducto"><i class="fas fa-plus"></i></a></th>    
+                    <th class="text-center">Editar/borrar</th>     
                   </tr>
                   </thead>
                   <tbody>
@@ -71,7 +72,7 @@ while ($row= mysqli_fetch_assoc($res)) {
     <td><?php echo $row['stock']?></td>
     <td><?php echo $row['imagenes']; ?></td>
     <td class="text-center">
-        <a href="panel.php?modulo=editarProducto&id=<?php echo $row['id']?>" class="btn btn-small btn-warning"> <i class="fas fa-edit"></i></a>
+        <a href="panel.php?modulo=editarProducto&idcliente=<?php echo $row['id']?>" class="btn btn-small btn-warning"> <i class="fas fa-edit"></i></a>
         <a href="panel.php?modulo=productos&idborrar=<?php echo $row['id']?>" class="btn btn-small btn-danger eliminar"> <i class="fas fa-trash"></i></a>
     </td>
    

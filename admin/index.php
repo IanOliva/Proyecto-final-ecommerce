@@ -9,8 +9,7 @@
     <!-- Google Font: Source Sans Pro -->
     <!-- <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
-    
-    
+
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <!-- bootstrap -->
@@ -48,10 +47,10 @@
                         header("location: panel.php");
                     } else {
                         ?>
-                <div class="alert alert-danger" role="alert">
-                    Error al loguear
-                </div>
-                <?php
+                        <div class="alert alert-danger" role="alert">
+                            Error al loguear
+                        </div>
+                        <?php
 
                     }
                 }
@@ -60,16 +59,17 @@
                 <form method="post">
 
                     <div class="input-group mb-3">
-                    <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                        <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
                         <input type="text" class="form-control" placeholder="Email" aria-label="Email"
                             aria-describedby="basic-addon1" name="email" required>
-                        
+
                     </div>
 
 
                     <div class="input-group mb-3">
-                    <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
-                        <input type="password" class="form-control" placeholder="Password" aria-label="contraseña" name="pass" required>
+                        <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                        <input type="password" class="form-control" placeholder="Password" aria-label="contraseña"
+                            name="pass" required>
                     </div>
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary btn-block" name="login">Ingresar</button>
@@ -101,14 +101,14 @@
     </div>
     <!-- /.login-box -->
 
-   
-    
+
+
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
     <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
+        </script>
 
 </body>
 

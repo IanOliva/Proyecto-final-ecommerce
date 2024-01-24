@@ -1,13 +1,13 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand navbar-dark">
+<nav class="navbar navbar-expand navbar-dark bg-primary sticky-top">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
 
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="index.php" class="nav-link">Home</a>
+            <a href="index.php" class="nav-link"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
+            <a href="index.php#contacto" class="nav-link">Contacto</a>
         </li>
     </ul>
 
@@ -68,8 +68,9 @@
                     </a>
                     <?php
                 } else {
+                    
                     ?>
-                    <a href="index.php?modulo=usuario" class="dropdown-item">
+                    <a href="index.php?modulo=cliente&id=<?php echo $_SESSION['id_cliente']; ?> " class="dropdown-item">
                         <i class="fas fa-user text-primary mr-2"></i>Hola
                         <?php echo $_SESSION['nombre_cliente']; ?>
                     </a>
@@ -87,17 +88,3 @@
 
     </ul>
 </nav>
-<?php
-$mensaje = $_REQUEST['mensaje'] ?? '';
-if ($mensaje) {
-    ?>
-    <div class="alert alert-primary alert-dismissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            <span class="sr-only">Close</span>
-        </button>
-        <?php echo $mensaje; ?>
-    </div>
-    <?php
-}
-?>

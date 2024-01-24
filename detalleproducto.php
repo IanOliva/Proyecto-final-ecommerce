@@ -6,7 +6,7 @@ $rowProducto = mysqli_fetch_assoc($resProducto);
 $path = "admin/" . $rowProducto['imagenes'];
 ?>
 <!-- Default box -->
-<div class="card card-solid">
+<div class="card card-solid mt-2 ">
     <div class="card-body">
         <div class="row">
             <div class="col-12 col-sm-6">
@@ -30,7 +30,8 @@ $path = "admin/" . $rowProducto['imagenes'];
                 <h3 class="my-3">
                     <?php echo $rowProducto['nombre'] ?>
                 </h3>
-                <p>aca iria la descripcion tomada de la db</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis amet nemo repudiandae adipisci quas eligendi in 
+                accusamus corrupti consequatur. Voluptas assumenda recusandae vero minima eius reiciendis deserunt incidunt omnis accusantium!</p>
 
                 <hr>
                 <h4>Stock disponible:
@@ -38,7 +39,7 @@ $path = "admin/" . $rowProducto['imagenes'];
                 </h4>
 
 
-                <h4>Colores (agregar en caso de que haya mas)</h4>
+                <!-- <h4>Colores (agregar en caso de que haya mas)</h4>
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-default text-center active">
                         <input type="radio" name="color_option" id="color_option_a1" autocomplete="off" checked>
@@ -47,9 +48,9 @@ $path = "admin/" . $rowProducto['imagenes'];
                         <i class="fas fa-circle fa-2x text-green"></i>
                     </label>
 
-                </div>
+                </div> -->
 
-                <h4 class="mt-3">Talle<small> selecciona uno</small></h4>
+                <!-- <h4 class="mt-3">Talle<small> selecciona uno</small></h4>
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-default text-center">
                         <input type="radio" name="color_option" id="color_option_b1" autocomplete="off">
@@ -75,7 +76,7 @@ $path = "admin/" . $rowProducto['imagenes'];
                         <br>
                         Xtra-Large
                     </label>
-                </div>
+                </div> -->
 
                 <div class="bg-gray py-2 px-3 mt-4">
                     <h2 class="mb-0">
