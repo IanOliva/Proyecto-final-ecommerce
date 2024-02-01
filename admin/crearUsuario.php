@@ -12,40 +12,56 @@
           include_once "DBecommerce.php";
           $conexion = mysqli_connect($host, $user, $password, $db);
           $email = mysqli_real_escape_string($conexion, $_REQUEST['email'] ?? '');
-          $pass = md5(mysqli_real_escape_string($conexion, $_REQUEST['pass'] ?? ''));
-          $confpass = md5(mysqli_real_escape_string($conexion, $_REQUEST['confpass'] ?? ''));
+          $pass = mysqli_real_escape_string($conexion, $_REQUEST['pass'] ?? '');
+          $confpass = mysqli_real_escape_string($conexion, $_REQUEST['confpass'] ?? '');
           $nombre = mysqli_real_escape_string($conexion, $_REQUEST['nombre'] ?? '');
+
           if ($pass == $confpass) {
-            $query = "INSERT INTO usuarios (email,pass,nombre) VALUES ('" . $email . "','" . $pass . "','" . $nombre . "')";
-            $res = mysqli_query($conexion, $query);
-            if ($res) {
-              echo '<meta http-equiv="refresh" content="0; url=panel.php?modulo=usuarios&mensaje=Usuario Creado correctamente" />';
-            } else {
+              // Utilizar una consulta preparada
+              $query = "INSERT INTO usuarios (email, pass, nombre) VALUES (?, ?, ?)";
+              $stmt = mysqli_prepare($conexion, $query);
+
+              if ($stmt) {
+                  // Hash seguro de la contraseña
+                  $hashedPassword = password_hash($pass, PASSWORD_DEFAULT);
+
+                  // Vincular parámetros
+                  mysqli_stmt_bind_param($stmt, "sss", $email, $hashedPassword, $nombre);
+
+                  // Ejecutar la consulta preparada
+                  $res = mysqli_stmt_execute($stmt);
+
+                  if ($res) {
+                      echo '<meta http-equiv="refresh" content="0; url=panel.php?modulo=usuarios&mensaje=Usuario Creado correctamente" />';
+                  } else {
+                      ?>
+                      <div class="alert alert-danger" role="alert">
+                          Error al crear usuario: <?php echo mysqli_error($conexion); ?>
+                      </div>
+                      <?php
+                  }
+
+                  // Cerrar la consulta preparada
+                  mysqli_stmt_close($stmt);
+              } else {
+                  ?>
+                  <div class="alert alert-danger" role="alert">
+                      Error en la preparación de la consulta: <?php echo mysqli_error($conexion); ?>
+                  </div>
+                  <?php
+              }
+          } else {
               ?>
-              <div class="alert alert-danger" role="alert">
-                Error al crear usuario
-                <?php echo mysqli_error($conexion); ?>
+              <div class="col-6 m-auto alert alert-warning alert-dismissible fade show" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <strong>Las contraseñas no coinciden</strong>
               </div>
               <?php
-            }
-
-          } else {
-            ?>
-            <div class="col-6 m-auto alert alert-warning alert-dismissible fade show" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <strong>Las contraseñas no coinciden</strong>
-            </div>
-
-            <script>
-            $(".alert").alert();
-            </script>
-            <?php
           }
         }
-
-        ?>
+          ?>
       </div>
     </div><!-- /.container-fluid -->
   </section>

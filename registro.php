@@ -10,7 +10,6 @@
     <!-- <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
 
-
     <!-- Theme style -->
     <link rel="stylesheet" href="admin/dist/css/adminlte.min.css">
     <!-- bootstrap -->
@@ -28,42 +27,54 @@
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body">
-                <p class="login-box-msg">Registrarse</p>
+                <p class="login-box-msg">Crea tu cuenta</p>
                 <?php
                 if (isset($_REQUEST['registro'])) {
 
                     session_start();
-                    $nombre = $_REQUEST['nombre']??'';
-                    $apellido = $_REQUEST['apellido']??'';
-                    $telefono = $_REQUEST['telefono']??'';
+                    $nombre = $_REQUEST['nombre'] ?? '';
+                    $apellido = $_REQUEST['apellido'] ?? '';
+                    $telefono = $_REQUEST['telefono'] ?? '';
                     $email = $_REQUEST['email'] ?? '';
                     $pass = $_REQUEST['pass'] ?? '';
-                    $pass = md5($pass);
-                    include_once "admin/DBecommerce.php";
-                    $conexion = mysqli_connect($host, $user, $password, $db);
-                    $query = "INSERT INTO clientes(nombre,apellido,telefono,email,pass) VALUES ('$nombre','$apellido','$telefono','$email','$pass')";
-                    $res = mysqli_query($conexion, $query);
-                    
+                    $confpass = $_REQUEST['pass'] ?? '';
+
+                    if ($pass === $confpass) {
+                        $pass = password_hash($pass, PASSWORD_DEFAULT);
+                        include_once "admin/DBecommerce.php";
+                        $conexion = mysqli_connect($host, $user, $password, $db);
+
+                        $query = "INSERT INTO clientes(nombre, apellido, telefono, email, pass) VALUES (?, ?, ?, ?, ?)";
+                        $stmt = mysqli_prepare($conexion, $query);
+
+                        
+                        mysqli_stmt_bind_param($stmt, "sssss", $nombre, $apellido, $telefono, $email, $pass);
+
+                       
+                        $res = mysqli_stmt_execute($stmt);
+                    }
+
+
+
                     if ($res) {
                         ?>
-                        
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                          <strong>Usuario creado exitosamente</strong>
-                           <a href="login.php">Ir al inicio de sesion</a>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <strong>Usuario creado exitosamente</strong>
+                            <a href="login.php">Ir al inicio de sesion</a>
                         </div>
-                        
-                       
-                       <?php 
+                        <?php
                     } else {
                         ?>
                         <div class="alert alert-danger" role="alert">
                             Error al Registrarse
                         </div>
-                        <?php
 
+                        <?php
+                        mysqli_stmt_close($stmt);
+                        mysqli_close($conexion);
                     }
                 }
                 ?>
@@ -83,7 +94,7 @@
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <span class="input-group-text"><i class="fa fa-phone"></i></span>
                         <input type="number" class="form-control" placeholder="Telefono" aria-label="Telefono"
                             aria-describedby="basic-addon1" name="telefono" required>
                     </div>
@@ -95,20 +106,27 @@
 
                     </div>
 
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                        <input type="password" class="form-control" placeholder="Contraseña" aria-label="contraseña"
+                            name="pass" required>
+                    </div>
 
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
-                        <input type="password" class="form-control" placeholder="Password" aria-label="contraseña"
-                            name="pass" required>
+                        <input type="password" class="form-control" placeholder="Confirmar contraseña" name="confpass"
+                            required>
+
                     </div>
                     <div class="m-2 row">
                         <button type="submit" class="btn btn-primary btn-block" name="registro">Registrarse</button>
                         <a href="login.php" class="text-success text-center mt-2">Ingresar</a>
                     </div>
+                </form>
             </div>
         </div>
 
-        </form>
+
 
 
 
@@ -122,10 +140,6 @@
 
 
     </div>
-    <!-- /.login-card-body -->
-    </div>
-    </div>
-    <!-- /.login-box -->
 
 
 

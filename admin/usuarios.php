@@ -4,23 +4,45 @@ $conexion = mysqli_connect($host, $user, $password, $db);
 
 if (isset($_REQUEST['idborrar'])) {
   $id = mysqli_real_escape_string($conexion, $_REQUEST['idborrar'] ?? '');
-  $query = "DELETE from usuarios WHERE id='" . $id . "';";
-  $res = mysqli_query($conexion, $query);
-  if ($res) {
-    ?>
-    <div class="alert alert-warning float-right" role="alert">
-      Usuario eliminado exitosamente
-    </div>
-  <?php
+
+  // Utilizar una consulta preparada
+  $query = "DELETE FROM usuarios WHERE id = ?";
+  $stmt = mysqli_prepare($conexion, $query);
+
+  if ($stmt) {
+    // Vincular parámetros
+    mysqli_stmt_bind_param($stmt, "s", $id);
+
+    // Ejecutar la consulta preparada
+    $res = mysqli_stmt_execute($stmt);
+
+    if ($res) {
+      ?>
+      <div class="alert alert-success float-right" role="alert">
+        Usuario eliminado exitosamente
+      </div>
+      <?php
+    } else {
+      ?>
+      <div class="alert alert-danger float-right" role="alert">
+        Error al eliminar usuario:
+        <?php echo mysqli_error($conexion); ?>
+      </div>
+      <?php
+    }
+
+    // Cerrar la consulta preparada
+    mysqli_stmt_close($stmt);
   } else {
     ?>
-    <div class="alert alert-warning float-right" role="alert">
-      Error al eliminar usuario
+    <div class="alert alert-danger float-right" role="alert">
+      Error en la preparación de la consulta:
       <?php echo mysqli_error($conexion); ?>
     </div>
-  <?php
+    <?php
   }
 }
+
 
 ?>
 
@@ -33,6 +55,7 @@ if (isset($_REQUEST['idborrar'])) {
         <div class="col-sm-6">
           <h1>Usuarios</h1>
         </div>
+
       </div>
     </div><!-- /.container-fluid -->
   </section>
@@ -54,7 +77,7 @@ if (isset($_REQUEST['idborrar'])) {
                   <tr>
                     <th>Nombre</th>
                     <th>Email</th>
-                    <th class="text-center">Editar/borrar</th>                      
+                    <th class="text-center">Editar/borrar</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -63,31 +86,41 @@ if (isset($_REQUEST['idborrar'])) {
                   <?php
                   include_once "DBecommerce.php";
                   $conexion = mysqli_connect($host, $user, $password, $db);
-                  $query = "SELECT id,email,nombre FROM usuarios;";
-                  $res = mysqli_query($conexion, $query);
+                  $query = "SELECT id, email, nombre FROM usuarios";
+                  $stmt = mysqli_prepare($conexion, $query);
 
+                  if ($stmt) {
+                    mysqli_stmt_execute($stmt);
 
-                  while ($row = mysqli_fetch_assoc($res)) {
-                    ?>
-                    <tr>
-                      <td>
-                        <?php echo $row['nombre'] ?>
-                      </td>
-                      <td>
-                        <?php echo $row['email'] ?>
-                      </td>
-                      <td class="text-center">
-                        <a href="panel.php?modulo=editarUsuario&id=<?php echo $row['id'] ?>"
-                          class="btn btn-small btn-warning"> <i class="fas fa-edit"></i></a>
-                        <a href="panel.php?modulo=usuarios&idborrar=<?php echo $row['id'] ?>"
-                          class="btn btn-small btn-danger eliminar"> <i class="fas fa-trash"></i></a>
-                      </td>
+                    $res = mysqli_stmt_get_result($stmt);
 
-                    </tr>
-                  </tbody>
-                  <?php
+                    while ($row = mysqli_fetch_assoc($res)) {
+                      ?>
+                      <tr>
+                        <td>
+                          <?php echo htmlspecialchars($row['nombre']); ?>
+                        </td>
+                        <td>
+                          <?php echo htmlspecialchars($row['email']); ?>
+                        </td>
+                        <td class="text-center">
+                          <a href="panel.php?modulo=editarUsuario&id=<?php echo htmlspecialchars($row['id']); ?>"
+                            class="btn btn-small btn-warning"> <i class="fas fa-edit"></i></a>
+                          <a href="panel.php?modulo=usuarios&idborrar=<?php echo htmlspecialchars($row['id']); ?>"
+                            class="btn btn-small btn-danger eliminar"> <i class="fas fa-trash"></i></a>
+                        </td>
+                      </tr>
+                      <?php
+                    }
+
+                    mysqli_stmt_close($stmt);
+                  } else {
+                    echo "Error en la preparación de la consulta: " . mysqli_error($conexion);
                   }
                   ?>
+                </tbody>
+
+
 
 
 

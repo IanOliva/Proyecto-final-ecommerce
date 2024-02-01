@@ -17,7 +17,7 @@ $modulo = $_REQUEST['modulo'] ?? '';
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin | Dashboard</title>
+    <title>Admin | <?php echo $modulo; ?></title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -266,9 +266,6 @@ $modulo = $_REQUEST['modulo'] ?? '';
     <script src="plugins/summernote/summernote-bs4.min.js"></script>
     <!-- overlayScrollbars -->
     <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="dist/js/adminlte.js"></script>
-
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>
 

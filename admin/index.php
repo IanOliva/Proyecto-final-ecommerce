@@ -29,32 +29,70 @@
             <div class="card-body">
                 <p class="login-box-msg">Iniciar Sesion</p>
                 <?php
-                if (isset($_REQUEST['login'])) {
 
+                if (isset($_POST['login'])) {
                     session_start();
-                    $email = $_REQUEST['email'] ?? '';
-                    $pass = $_REQUEST['pass'] ?? '';
-                    $pass = md5($pass);
+
+                    // Evitar inyección de SQL usando sentencias preparadas
                     include_once "DBecommerce.php";
                     $conexion = mysqli_connect($host, $user, $password, $db);
-                    $query = "SELECT id,email,nombre FROM usuarios where email='" . $email . "' and pass='" . $pass . "'";
-                    $res = mysqli_query($conexion, $query);
-                    $row = mysqli_fetch_assoc($res);
-                    if ($row) {
-                        $_SESSION['id'] = $row['id'];
-                        $_SESSION['email'] = $row['email'];
-                        $_SESSION['nombre'] = $row['nombre'];
-                        header("location: panel.php");
+
+                    $email = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '';
+                    $pass = isset($_POST['pass']) ? $_POST['pass'] : '';
+                    $hashedPass = password_hash($pass, PASSWORD_DEFAULT);  // Utilizar password_hash para almacenar contraseñas de forma segura.
+                
+                    $query = "SELECT id, email, nombre, pass FROM usuarios WHERE email=?";
+                    $stmt = mysqli_prepare($conexion, $query);
+
+                    if ($stmt) {
+                        mysqli_stmt_bind_param($stmt, "s", $email);
+                        mysqli_stmt_execute($stmt);
+                        mysqli_stmt_store_result($stmt);
+
+                        if (mysqli_stmt_num_rows($stmt) > 0) {
+                            mysqli_stmt_bind_result($stmt, $id, $email, $nombre, $storedPass);
+                            mysqli_stmt_fetch($stmt);
+
+                            // Verificar la contraseña con password_verify
+                            if (password_verify($pass, $storedPass)) {
+                                session_start();
+                                $_SESSION['id'] = $id;
+                                $_SESSION['email'] = $email;
+                                $_SESSION['nombre'] = $nombre;
+                                header("location: panel.php");
+                                exit();
+                            } else {
+                                ?>
+                                <div class="alert alert-danger" role="alert">
+                                    Error al iniciar sesión. Contraseña incorrecta.
+                                </div>
+                                <?php
+                            }
+                        } else {
+                            ?>
+                            <div class="alert alert-danger" role="alert">
+                                Error al iniciar sesión. Usuario no encontrado.
+                            </div>
+                            <?php
+                        }
+
+                        mysqli_stmt_close($stmt);
                     } else {
                         ?>
                         <div class="alert alert-danger" role="alert">
-                            Error al loguear
+                            Error en la preparación de la consulta:
+                            <?php echo mysqli_error($conexion); ?>
                         </div>
                         <?php
-
                     }
+
+                    mysqli_close($conexion);
                 }
+
                 ?>
+
+
+
 
                 <form method="post">
 

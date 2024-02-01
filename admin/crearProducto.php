@@ -1,35 +1,63 @@
 <?php
 if (isset($_REQUEST['guardar'])) {
     include_once "DBecommerce.php";
-$conexion=mysqli_connect($host,$user,$password,$db);
+    $conexion = mysqli_connect($host, $user, $password, $db);
 
-$nombre=mysqli_real_escape_string($conexion,$_REQUEST['nombre']??'');
-$precio=mysqli_real_escape_string($conexion,$_REQUEST['precio']??'');
-$stock=mysqli_real_escape_string($conexion,$_REQUEST['stock']??'');
+    $nombre = mysqli_real_escape_string($conexion, $_REQUEST['nombre'] ?? '');
+    $precio = mysqli_real_escape_string($conexion, $_REQUEST['precio'] ?? '');
+    $stock = mysqli_real_escape_string($conexion, $_REQUEST['stock'] ?? '');
 
-if ($_FILES["imagenes"]) {
-  $nombre_base = basename($_FILES["imagenes"]["name"]);
-  $nombre_final = date("d-m-y"). "-" . date("h-i-s"). "-". $nombre_base; //distinguir imagenes
-  $ruta = "archivos/" . $nombre_final;
-  
-  $subirarchivo = move_uploaded_file($_FILES["imagenes"]["tmp_name"], $ruta);
-  if ($subirarchivo) {
-    $query="INSERT INTO productos (nombre,precio,stock,imagenes) VALUES ('".$nombre."','".$precio."','".$stock."','".$ruta."')";
-$res=mysqli_query($conexion,$query);
-if ($res) {
-    echo '<meta http-equiv="refresh" content="0; url=panel.php?modulo=productos&mensaje=Producto Creado correctamente" />';
-}else {
-    ?>
-<div class="alert alert-danger" role="alert">
-    Error al crear producto <?php echo mysqli_error($conexion);?>
-</div>
-<?php
-}
-    
-}
+    if ($_FILES["imagenes"]["error"] == UPLOAD_ERR_OK) {
+        $nombre_base = basename($_FILES["imagenes"]["name"]);
+        $nombre_final = date("d-m-y") . "-" . date("h-i-s") . "-" . $nombre_base; // Diferenciar imágenes
+        $ruta = "archivos/" . $nombre_final;
 
+        $subirarchivo = move_uploaded_file($_FILES["imagenes"]["tmp_name"], $ruta);
+        if ($subirarchivo) {
+            $query = "INSERT INTO productos (nombre, precio, stock, imagenes) VALUES (?, ?, ?, ?)";
+            $stmt = mysqli_prepare($conexion, $query);
 
-}
+            if ($stmt) {
+                mysqli_stmt_bind_param($stmt, "ssss", $nombre, $precio, $stock, $ruta);
+                $res = mysqli_stmt_execute($stmt);
+
+                if ($res) {
+                    echo '<meta http-equiv="refresh" content="0; url=panel.php?modulo=productos&mensaje=Producto creado correctamente" />';
+                } else {
+                    ?>
+                    <div class="alert alert-danger" role="alert">
+                        Error al crear producto:
+                        <?php echo mysqli_error($conexion); ?>
+                    </div>
+                    <?php
+                }
+
+                // Cerrar la consulta preparada
+                mysqli_stmt_close($stmt);
+            } else {
+                ?>
+                <div class="alert alert-danger" role="alert">
+                    Error en la preparación de la consulta:
+                    <?php echo mysqli_error($conexion); ?>
+                </div>
+                <?php
+            }
+        } else {
+            ?>
+            <div class="alert alert-danger" role="alert">
+                Error al subir el archivo. Asegúrate de que la carpeta "archivos" existe y tiene los permisos adecuados.
+            </div>
+            <?php
+        }
+    } else {
+        ?>
+        <div class="alert alert-danger" role="alert">
+            Error al subir el archivo:
+            <?php echo $_FILES["imagenes"]["error"]; ?>
+        </div>
+        <?php
+    }
+
 
 }
 ?>

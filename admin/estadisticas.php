@@ -2,41 +2,100 @@
 include_once "DBecommerce.php";
 $conexion = mysqli_connect($host, $user, $password, $db);
 
+//obtener las ventas de los ultimos 7 dias
 $queryNumVentas = "SELECT COUNT(id) AS num FROM ventas WHERE fecha BETWEEN DATE(DATE_SUB(now(),INTERVAL 7 DAY)) AND NOW();";
-$resNumVentas = mysqli_query($conexion, $queryNumVentas);
-$rowNumVentas = mysqli_fetch_assoc($resNumVentas);
+$stmtNumVentas = mysqli_prepare($conexion, $queryNumVentas);
+if ($stmtNumVentas) {
+  // 2. Ejecutar la consulta
+  mysqli_stmt_execute($stmtNumVentas);
 
-$queryNumCli = "SELECT COUNT(id) AS num FROM clientes;";
-$resNumCli = mysqli_query($conexion, $queryNumCli);
-$rowNumCli = mysqli_fetch_assoc($resNumCli);
+  // 3. Vincular resultados
+  mysqli_stmt_bind_result($stmtNumVentas, $numVentas);
 
-$queryNumProd = "SELECT COUNT(id) AS num FROM productos;";
-$resNumProd = mysqli_query($conexion, $queryNumProd);
-$rowNumProd = mysqli_fetch_assoc($resNumProd);
-
-$queryVentasDia = "SELECT
-COUNT(detalleventas.subTotal) as total,
-ventas.fecha
-FROM
-ventas
-INNER JOIN detalleventas ON detalleventas.idventa = ventas.id
-GROUP BY DAY(ventas.fecha);";
-$resVentasDia = mysqli_query($conexion, $queryVentasDia);
-$labelVentas = "";
-$datosVentas = "";
-
-while ($rowVentasDia = mysqli_fetch_assoc($resVentasDia)) {
-  $labelVentas = $labelVentas . "'" . date_format(date_create($rowVentasDia['fecha']), "d-m-y") . "',";
-  $datosVentas = $datosVentas.$rowVentasDia['total'] . ",";
+  // 4. Obtener resultados
+  mysqli_stmt_fetch($stmtNumVentas);
+  $Ventas = $numVentas;
+  // 5. Cerrar la sentencia preparada
+  mysqli_stmt_close($stmtNumVentas);
 }
-$labelVentas = rtrim($labelVentas, ",");
-$datosVentas = rtrim($datosVentas, ",");
+
+
+//obtener la cantidad de usuarios registrados
+$queryNumCli = "SELECT COUNT(id) AS num FROM clientes";
+$stmtclientes = mysqli_prepare($conexion, $queryNumCli);
+if ($stmtclientes) {
+  // 2. Ejecutar la consulta
+  mysqli_stmt_execute($stmtclientes);
+
+  // 3. Vincular resultados
+  mysqli_stmt_bind_result($stmtclientes, $num);
+
+  // 4. Obtener resultados
+  mysqli_stmt_fetch($stmtclientes);
+  $clientes = $num;
+  // 5. Cerrar la sentencia preparada
+  mysqli_stmt_close($stmtclientes);
+
+  // // 6. Cerrar la conexión
+  // mysqli_close($conexion);
+}
+
+//obtener la cantidad de productos cargados
+$queryNumProd = "SELECT COUNT(id) AS num FROM productos;";
+$stmtproductos = mysqli_prepare($conexion, $queryNumProd);
+if ($stmtproductos) {
+
+  mysqli_stmt_execute($stmtproductos);
+
+  mysqli_stmt_bind_result($stmtproductos, $numProd);
+
+  mysqli_stmt_fetch($stmtproductos);
+  $productos = $numProd;
+
+  mysqli_stmt_close($stmtproductos);
+}
+
+
+//obtener los valores para el grafico de ventas
+$queryVentasDia = "SELECT
+                        COUNT(detalleventas.subTotal) as total,
+                        DATE_FORMAT(ventas.fecha, '%d-%m-%y') as fecha_formateada
+                    FROM
+                        ventas
+                    INNER JOIN detalleventas ON detalleventas.idventa = ventas.id
+                    GROUP BY fecha_formateada";
+
+$stmtVentasDia = mysqli_prepare($conexion, $queryVentasDia);
+
+if ($stmtVentasDia) {
+  mysqli_stmt_execute($stmtVentasDia);
+
+  $labelVentas = [];
+  $datosVentas = [];
+
+  mysqli_stmt_bind_result($stmtVentasDia, $total, $fecha_formateada);
+
+  while (mysqli_stmt_fetch($stmtVentasDia)) {
+    $labelVentas[] = "'" . $fecha_formateada . "'";
+    $datosVentas[] = $total;
+  }
+
+  // Convertir arrays a cadenas
+  $labelVentas = implode(",", $labelVentas);
+  $datosVentas = implode(",", $datosVentas);
+
+  mysqli_stmt_close($stmtVentasDia);
+} else {
+  echo "Error en la preparación de la consulta: " . mysqli_error($conexion);
+}
+
+
 
 
 ?>
 <script>
-  var labelVentas = [<?php echo $labelVentas;?>];
-  var datosVentas = [<?php echo $datosVentas;?>];
+  var labelVentas = [<?php echo $labelVentas; ?>];
+  var datosVentas = [<?php echo $datosVentas; ?>];
 </script>
 
 
@@ -65,14 +124,14 @@ $datosVentas = rtrim($datosVentas, ",");
           <div class="small-box bg-info">
             <div class="inner">
               <h3>
-                <?php echo $rowNumVentas['num']; ?>
+                <?php echo $Ventas; ?>
               </h3>
               <p>Ventas en los ultimos 7 dias</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-           <br>
+            <br>
           </div>
         </div>
         <!-- ./col -->
@@ -81,7 +140,7 @@ $datosVentas = rtrim($datosVentas, ",");
           <div class="small-box bg-success">
             <div class="inner">
               <h3>
-                <?php echo $rowNumProd['num']; ?><sup style="font-size: 20px"></sup>
+                <?php echo $productos; ?><sup style="font-size: 20px"></sup>
               </h3>
 
               <p>Productos Cargados</p>
@@ -89,7 +148,7 @@ $datosVentas = rtrim($datosVentas, ",");
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-           <br>
+            <br>
           </div>
         </div>
         <!-- ./col -->
@@ -98,7 +157,7 @@ $datosVentas = rtrim($datosVentas, ",");
           <div class="small-box bg-warning">
             <div class="inner">
               <h3>
-                <?php echo $rowNumCli['num']; ?>
+                <?php echo $clientes; ?>
               </h3>
 
               <p>Usuarios Registrados</p>
@@ -106,7 +165,7 @@ $datosVentas = rtrim($datosVentas, ",");
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-           <br>
+            <br>
           </div>
         </div>
         <!-- ./col -->

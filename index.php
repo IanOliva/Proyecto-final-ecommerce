@@ -58,8 +58,8 @@
         <div class="col-12">
             <?php
             include_once "menu.php";
-            ?>
-            <?php
+
+
             $mensaje = $_REQUEST['mensaje'] ?? '';
             if ($mensaje) {
                 ?>
@@ -113,25 +113,27 @@
                         </div>
                     </div>
                     <div class="col-7">
-                        <div class="form-group">
-                            <label for="inputName">Nombre</label>
-                            <input type="text" id="inputName" class="form-control" />
+                        <div class="">
+
+                            <p class="lead mb-5"><strong>Tel:</strong>1125375892<br>
+                                <strong>Email: </strong> ejemplomailecommerce@gmail.com
+                            </p>
+                            <div class="mt-4 product-share">
+                                <a href="#" class="text-gray">
+                                    <i class="fab fa-facebook-square fa-2x"></i>
+                                </a>
+                                <a href="#" class="text-gray">
+                                    <i class="fab fa-twitter-square fa-2x"></i>
+                                </a>
+                                <a href="#" class="text-gray">
+                                    <i class="fas fa-envelope-square fa-2x"></i>
+                                </a>
+                                <a href="#" class="text-gray">
+                                    <i class="fas fa-rss-square fa-2x"></i>
+                                </a>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="inputEmail">E-Mail</label>
-                            <input type="email" id="inputEmail" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label for="inputSubject">Asunto</label>
-                            <input type="text" id="inputSubject" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label for="inputMessage">Mensaje</label>
-                            <textarea id="inputMessage" class="form-control" rows="4"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-primary" value="Send message">
-                        </div>
+
                     </div>
                 </div>
 
