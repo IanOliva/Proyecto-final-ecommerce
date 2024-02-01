@@ -76,7 +76,7 @@ if ($_SESSION['id_cliente']) {
                     <div class="form-check">
                         <label class="form-check-label">
                             <input type="checkbox" class="form-check-input" id="obtener">
-                            Jalar datos del cliente
+                            Usar datos del cliente
                         </label>
                     </div>
                 </div>

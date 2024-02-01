@@ -7,42 +7,47 @@ if (isset($_REQUEST['guardar'])) {
   $pass = mysqli_real_escape_string($conexion, $_REQUEST['pass'] ?? '');
   $nombre = mysqli_real_escape_string($conexion, $_REQUEST['nombre'] ?? '');
   $id = mysqli_real_escape_string($conexion, $_REQUEST['id'] ?? '');
+  $confpass = mysqli_real_escape_string($conexion, $_REQUEST['confpass'] ?? '');
 
-  // Utilizar una consulta preparada
-  $query = "UPDATE usuarios SET email=?, pass=?, nombre=? WHERE id=?";
-  $stmt = mysqli_prepare($conexion, $query);
 
-  if ($stmt) {
-    // Hash seguro de la contraseña
-    $hashedPassword = password_hash($pass, PASSWORD_DEFAULT);
+  if ($pass == $confpass) {
+    // Utilizar una consulta preparada
+    $query = "UPDATE usuarios SET email=?, pass=?, nombre=? WHERE id=?";
+    $stmt = mysqli_prepare($conexion, $query);
 
-    // Vincular parámetros
-    mysqli_stmt_bind_param($stmt, "ssss", $email, $hashedPassword, $nombre, $id);
+    if ($stmt) {
+      // Hash seguro de la contraseña
+      $hashedPassword = password_hash($pass, PASSWORD_DEFAULT);
 
-    // Ejecutar la consulta preparada
-    $res = mysqli_stmt_execute($stmt);
+      // Vincular parámetros
+      mysqli_stmt_bind_param($stmt, "ssss", $email, $hashedPassword, $nombre, $id);
 
-    if ($res) {
-      echo '<meta http-equiv="refresh" content="0; url=panel.php?modulo=usuarios&mensaje=Usuario modificado correctamente" />';
+      // Ejecutar la consulta preparada
+      $res = mysqli_stmt_execute($stmt);
+
+      if ($res) {
+        echo '<meta http-equiv="refresh" content="0; url=panel.php?modulo=usuarios&mensaje=Usuario modificado correctamente" />';
+      } else {
+        ?>
+        <div class="alert alert-danger" role="alert">
+          Error al modificar usuario:
+          <?php echo mysqli_error($conexion); ?>
+        </div>
+        <?php
+      }
+
+      // Cerrar la consulta preparada
+      mysqli_stmt_close($stmt);
     } else {
       ?>
       <div class="alert alert-danger" role="alert">
-        Error al modificar usuario:
+        Error en la preparación de la consulta:
         <?php echo mysqli_error($conexion); ?>
       </div>
       <?php
     }
-
-    // Cerrar la consulta preparada
-    mysqli_stmt_close($stmt);
-  } else {
-    ?>
-    <div class="alert alert-danger" role="alert">
-      Error en la preparación de la consulta:
-      <?php echo mysqli_error($conexion); ?>
-    </div>
-    <?php
   }
+
 
 
 
@@ -112,17 +117,22 @@ if ($stmt) {
                 <div class="form-group">
                   <label>Email</label>
                   <input type="email" name="email" class="form-control" value="<?php echo $usEmail ?>" required>
-                  <small id="helpId" class="text-muted">Help text</small>
+                  <small id="helpId" class="text-muted">Ejemplo: nombre@gmail.com</small>
                 </div>
                 <div class="form-group">
                   <label>Nombre</label>
                   <input type="text" name="nombre" class="form-control" value="<?php echo $usNombre ?>" required>
-                  <small id="helpId" class="text-muted">Help text</small>
+                  <small id="helpId" class="text-muted">Nombre sin numeros</small>
                 </div>
                 <div class="form-group">
                   <label>Contraseña</label>
                   <input type="password" name="pass" class="form-control" required>
-                  <small id="helpId" class="text-muted">Help text</small>
+                  <small id="helpId" class="text-muted">Utiliza mayusculas y numeros para mayor seguridad</small>
+                </div>
+                <div class="form-group">
+                  <label>Confirmar Contraseña</label>
+                  <input type="password" name="confpass" class="form-control" required>
+                  <small id="helpId" class="text-muted">Repite la contraseña</small>
                 </div>
                 <div class="form-group">
                   <input type="hidden" name="id" value="<?php echo $usId ?>">

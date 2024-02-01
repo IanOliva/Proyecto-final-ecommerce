@@ -125,16 +125,11 @@ if (isset($_REQUEST['idborrar'])) {
                   mysqli_stmt_close($stmt);
                   ?>
 
-
-
-
-
               </table>
             </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-
         </div>
         <!-- /.col -->
       </div>
