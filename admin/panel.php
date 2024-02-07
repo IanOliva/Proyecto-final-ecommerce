@@ -18,6 +18,7 @@ $modulo = $_REQUEST['modulo'] ?? '';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin | <?php echo $modulo; ?></title>
+    <link rel="shortcut icon" href="imagenes\logo webEcommerce.ico" type="image/x-icon">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -100,9 +101,9 @@ $modulo = $_REQUEST['modulo'] ?? '';
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
-                <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
-                <span class="brand-text font-weight-light">Proyecto Ecommerce</span>
+                <img src="imagenes/logo webEcommerce.jpg" alt="logo Ecommerce" class="brand-image img-circle elevation-3"
+                    >
+                <span class="brand-text font-weight-light">Ecommerce</span>
             </a>
 
             <!-- Sidebar -->
