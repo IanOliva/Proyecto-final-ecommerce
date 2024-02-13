@@ -1,4 +1,7 @@
 <?php
+
+// insertar en bd los datos del producto 
+
 if (isset($_REQUEST['guardar'])) {
     include_once "DBecommerce.php";
     $conexion = mysqli_connect($host, $user, $password, $db);

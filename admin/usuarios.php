@@ -1,7 +1,7 @@
 <?php
 include_once "DBecommerce.php";
 $conexion = mysqli_connect($host, $user, $password, $db);
-
+//borrar por id
 if (isset($_REQUEST['idborrar'])) {
   $id = mysqli_real_escape_string($conexion, $_REQUEST['idborrar'] ?? '');
 
@@ -84,6 +84,7 @@ if (isset($_REQUEST['idborrar'])) {
 
 
                   <?php
+                  //obtener los datos de los usuarios
                   include_once "DBecommerce.php";
                   $conexion = mysqli_connect($host, $user, $password, $db);
                   $query = "SELECT id, email, nombre FROM usuarios";

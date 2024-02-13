@@ -1,7 +1,7 @@
 <?php
 include_once "admin/DBecommerce.php";
 $conexion = mysqli_connect($host, $user, $password, $db);
-
+//actualizacion de datos del cliente
 if (isset($_POST['confCambios'])) {
 
 

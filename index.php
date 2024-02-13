@@ -28,8 +28,10 @@
 
     <!-- Daterange picker -->
     <link rel="stylesheet" href="admin/plugins/daterangepicker/daterangepicker.css">
+
     <?php
     session_start();
+    //recibe el boton para cerrar sesion
     $accion = $_REQUEST['accion'] ?? '';
     if ($accion == 'cerrar') {
         session_destroy();
@@ -75,6 +77,7 @@
             }
             ?>
             <?php
+            //obtiene los modulos para redirigir hacia las paginas
             $modulo = $_REQUEST['modulo'] ?? '';
             if ($modulo == 'productos' || $modulo == "") {
                 include_once "productosTienda.php";

@@ -29,6 +29,7 @@
             <div class="card-body">
                 <p class="login-box-msg">Crea tu cuenta</p>
                 <?php
+                //registrar un nuevo cliente
                 if (isset($_REQUEST['registro'])) {
 
                     session_start();

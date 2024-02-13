@@ -1,6 +1,6 @@
 <div class="row mt-2">
                     <?php 
-                        
+                        //principal de la tienda paginada
                         $where=" where 1=1 ";
                         $nombre= mysqli_real_escape_string($conexion,$_REQUEST['nombre']??'');
                         if( empty($nombre)==false ){

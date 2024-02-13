@@ -1,12 +1,13 @@
 <?php
 if ($_SESSION['id_cliente']) {
+    // actualizo el cliente si se modifica sus datos
     if (isset($_REQUEST['guardar'])) {
         $nombreCli = $_REQUEST['nombreCli'] ?? '';
         $emailCli = $_REQUEST['emailCli'] ?? '';
         $direccionCli = $_REQUEST['direccionCli'] ?? '';
         $queryCli = "UPDATE clientes set nombre='$nombreCli',email='$emailCli',direccion='$direccionCli' where id='" . $_SESSION['id_cliente'] . "' ";
         $resCli = mysqli_query($conexion, $queryCli);
-
+    //inserto los datos de la persona que recibe en la db
         $nombreRec = $_REQUEST['nombreRec'] ?? '';
         $emailRec = $_REQUEST['emailRec'] ?? '';
         $direccionRec = $_REQUEST['direccionRec'] ?? '';
@@ -24,6 +25,8 @@ if ($_SESSION['id_cliente']) {
             <?php
         }
     }
+
+    //obtengo ambos datos de la db para mostrar en los inputs cliente y destino
 
     $queryCli = "SELECT nombre,email,direccion from clientes where id='" . $_SESSION['id_cliente'] . "';";
     $resCli = mysqli_query($conexion, $queryCli);

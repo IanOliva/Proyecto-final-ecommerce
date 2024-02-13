@@ -1,4 +1,6 @@
 <?php
+//obtengo los datos de cliente
+
 include_once "admin/DBecommerce.php";
 $conexion = mysqli_connect($host, $user, $password, $db);
 
@@ -25,6 +27,7 @@ $resDireccion = $resultDireccion;
 mysqli_stmt_close($stmt);
 
 
+//obtengo cantidad de compras del cliente
 $id = mysqli_real_escape_string($conexion, $_REQUEST['id'] ?? '');
 $queryventas = "SELECT COUNT(id) as num FROM ventas WHERE idcli = ?";
 $stmtventas = mysqli_prepare($conexion, $queryventas);

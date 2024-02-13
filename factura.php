@@ -1,5 +1,5 @@
 <?php
-
+// inserto en la db los detalles de la venta
 if ($_SESSION['id_cliente']) {
     if (isset($_REQUEST['pagar'])) {
         ?>
@@ -41,6 +41,8 @@ if ($_SESSION['id_cliente']) {
         borrarCarrito();
         }
     }
+
+    //funciones para crear las tablas y eliminar los datos del carrito al terminar el pedido
     function borrarCarrito(){
         ?>
             <script>
@@ -71,6 +73,7 @@ if ($_SESSION['id_cliente']) {
         </thead>
         <tbody>
             <?php
+                //se transforma la variable conexion con global para poder usarla dentro de la funcion
                 global $conexion;
                 $queryRecibe="SELECT nombre,email,direccion 
                 from person_recibe 

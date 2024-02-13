@@ -30,7 +30,7 @@
             <div class="card-body">
                 <p class="login-box-msg">Iniciar Sesion</p>
                 <?php
-
+                //inicio de sesion 
                 if (isset($_REQUEST['login'])) {
                     session_start();
 

@@ -75,6 +75,7 @@ if (isset($_REQUEST['idborrar'])) {
 
 
                   <?php
+                  // obtengo los datos de los productos 
                   include_once "DBecommerce.php";
                   $conexion = mysqli_connect($host, $user, $password, $db);
                   $query = "SELECT id, nombre, precio, stock, imagenes FROM productos";

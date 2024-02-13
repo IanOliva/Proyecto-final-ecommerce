@@ -1,4 +1,5 @@
-<?php ;
+<?php 
+//obtengo los datos del producto por id
 $id = mysqli_real_escape_string($conexion, $_REQUEST['id'] ?? '');
 $queryProducto = "SELECT id,nombre,precio,stock,imagenes FROM productos WHERE id = '$id';";
 $resProducto = mysqli_query($conexion, $queryProducto);

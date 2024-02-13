@@ -36,8 +36,7 @@ if ($stmtclientes) {
   // 5. Cerrar la sentencia preparada
   mysqli_stmt_close($stmtclientes);
 
-  // // 6. Cerrar la conexión
-  // mysqli_close($conexion);
+ 
 }
 
 //obtener la cantidad de productos cargados
@@ -169,9 +168,9 @@ if ($stmtVentasDia) {
           </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-6">
+        <!-- <div class="col-lg-3 col-6"> -->
           <!-- small box -->
-          <div class="small-box bg-danger">
+          <!-- <div class="small-box bg-danger">
             <div class="inner">
               <h3>10</h3>
 
@@ -182,7 +181,7 @@ if ($stmtVentasDia) {
             </div>
             <br>
           </div>
-        </div>
+        </div> -->
         <!-- ./col -->
       </div>
       <!-- /.row -->

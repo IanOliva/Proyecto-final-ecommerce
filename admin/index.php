@@ -30,6 +30,8 @@
                 <p class="login-box-msg">Iniciar Sesion</p>
                 <?php
 
+                //verificar credenciales para iniciar sesion
+                
                 if (isset($_POST['login'])) {
                     session_start();
 
@@ -63,27 +65,27 @@
                                 exit();
                             } else {
                                 ?>
-                                <div class="alert alert-danger" role="alert">
-                                    Error al iniciar sesión. Contraseña incorrecta.
-                                </div>
-                                <?php
+                <div class="alert alert-danger" role="alert">
+                    Error al iniciar sesión. Contraseña incorrecta.
+                </div>
+                <?php
                             }
                         } else {
                             ?>
-                            <div class="alert alert-danger" role="alert">
-                                Error al iniciar sesión. Usuario no encontrado.
-                            </div>
-                            <?php
+                <div class="alert alert-danger" role="alert">
+                    Error al iniciar sesión. Usuario no encontrado.
+                </div>
+                <?php
                         }
 
                         mysqli_stmt_close($stmt);
                     } else {
                         ?>
-                        <div class="alert alert-danger" role="alert">
-                            Error en la preparación de la consulta:
-                            <?php echo mysqli_error($conexion); ?>
-                        </div>
-                        <?php
+                <div class="alert alert-danger" role="alert">
+                    Error en la preparación de la consulta:
+                    <?php echo mysqli_error($conexion); ?>
+                </div>
+                <?php
                     }
 
                     mysqli_close($conexion);
@@ -146,7 +148,7 @@
     <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-        </script>
+    </script>
 
 </body>
 

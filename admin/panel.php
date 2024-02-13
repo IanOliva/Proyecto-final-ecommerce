@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+
+//iniciar sesion 
+
 session_start();
 session_regenerate_id(true); //evita el hijacking
 if (isset($_REQUEST['sesion']) && $_REQUEST['sesion'] == "cerrar") {
@@ -17,7 +20,9 @@ $modulo = $_REQUEST['modulo'] ?? '';
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin | <?php echo $modulo; ?></title>
+    <title>Admin |
+        <?php echo $modulo; ?>
+    </title>
     <link rel="shortcut icon" href="imagenes\logo webEcommerce.ico" type="image/x-icon">
 
     <!-- Google Font: Source Sans Pro -->
@@ -95,14 +100,14 @@ $modulo = $_REQUEST['modulo'] ?? '';
             </ul>
         </nav>
 
-        
+
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
-                <img src="imagenes/logo webEcommerce.jpg" alt="logo Ecommerce" class="brand-image img-circle elevation-3"
-                    >
+                <img src="imagenes/logo webEcommerce.jpg" alt="logo Ecommerce"
+                    class="brand-image img-circle elevation-3">
                 <span class="brand-text font-weight-light">Ecommerce</span>
             </a>
 
@@ -174,22 +179,19 @@ $modulo = $_REQUEST['modulo'] ?? '';
 
         <?php
         if (isset($_REQUEST['mensaje'])) {
+            //recibe los mensajes desde otros modulos
             ?>
-
-
-
-        <div class="alert alert-primary alert-dismissible fade show float-right m-2" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                <span class="sr-only">Close</span>
-            </button>
-            <?php echo $_REQUEST['mensaje'] ?>
-        </div>
-
-
+            
+            <div class="alert alert-primary alert-dismissible fade show float-right m-2" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <?php echo $_REQUEST['mensaje'] ?>
+            </div>
 
         <?php
-
+        //direcciona a cada parte de la pagina segun el modulo
         }
 
         if ($modulo == "estadisticas" || $modulo == "") {
@@ -245,7 +247,7 @@ $modulo = $_REQUEST['modulo'] ?? '';
     <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-    $.widget.bridge('uibutton', $.ui.button);
+        $.widget.bridge('uibutton', $.ui.button);
     </script>
     <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -281,16 +283,16 @@ $modulo = $_REQUEST['modulo'] ?? '';
 
     <!-- alerta eliminar -->
     <script>
-    $(document).ready(function() {
-        $(".eliminar").click(function(e) {
-            e.preventDefault();
-            var res = confirm("¿Estas seguro de eliminar el registro?");
-            if (res == true) {
-                var link = $(this).attr("href");
-                window.location = link;
-            }
-        })
-    });
+        $(document).ready(function () {
+            $(".eliminar").click(function (e) {
+                e.preventDefault();
+                var res = confirm("¿Estas seguro de eliminar el registro?");
+                if (res == true) {
+                    var link = $(this).attr("href");
+                    window.location = link;
+                }
+            })
+        });
     </script>
 
 

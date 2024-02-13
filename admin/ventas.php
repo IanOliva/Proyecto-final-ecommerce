@@ -27,13 +27,14 @@
                     <th>Id venta</th>
                     <th>Id Cliente</th>
                     <th>Fecha</th>
-                    <th>Ver</th>
+                    <!-- <th>Ver</th> -->
                   </tr>
                 </thead>
                 <tbody>
 
 
                   <?php
+                  //obtengo datos de las ventas
                   include_once "DBecommerce.php";
                   $conexion = mysqli_connect($host, $user, $password, $db);
                   $query = "SELECT id, idcli, fecha FROM ventas";
@@ -56,7 +57,7 @@
                           <td>
                             <?php echo htmlspecialchars($row['fecha']); ?>
                           </td>
-                          <td><a href=""><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
+                          <!-- <td><a href=""><i class="fa fa-plus-square" aria-hidden="true"></i></a></td> -->
                         </tr>
                         <?php
                       }

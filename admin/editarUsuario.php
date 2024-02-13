@@ -1,4 +1,7 @@
 <?php
+
+//actualizar los datos de usuario administrador por id
+
 include_once "DBecommerce.php";
 $conexion = mysqli_connect($host, $user, $password, $db);
 if (isset($_REQUEST['guardar'])) {
@@ -47,14 +50,9 @@ if (isset($_REQUEST['guardar'])) {
       <?php
     }
   }
-
-
-
-
-
 }
 
-// Obtener datos del usuario
+// Obtener datos del usuario administrador para mostrar en los inputs
 $id = mysqli_real_escape_string($conexion, $_REQUEST['id'] ?? '');
 $query = "SELECT id, email, pass, nombre FROM usuarios WHERE id=?";
 $stmt = mysqli_prepare($conexion, $query);

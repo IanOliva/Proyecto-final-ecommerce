@@ -1,4 +1,6 @@
 <?php
+
+// actualizar los productos por id 
 include_once "DBecommerce.php";
 $conexion = mysqli_connect($host, $user, $password, $db);
 
@@ -31,6 +33,8 @@ if (isset($_REQUEST['guardar'])) {
     mysqli_stmt_close($stmt);
   }
 }
+
+//obtener los datos de producto para mostrar en los inputs
 
 $id = mysqli_real_escape_string($conexion, $_REQUEST['id'] ?? '');
 $query = "SELECT id, nombre, precio, stock FROM productos WHERE id=?";
