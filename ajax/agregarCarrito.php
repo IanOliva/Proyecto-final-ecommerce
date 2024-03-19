@@ -1,7 +1,3 @@
-<!-- agregar productos a una lista de productos almacenada en una cookie. Si un producto ya está presente en la lista, se
-actualiza su cantidad. Si no, se añade como un nuevo producto. Finalmente, se devuelve la lista de productos actualizada
-en formato JSON. -->
-
 <?php
 $productos = unserialize($_COOKIE['productos'] ?? '');
 if (is_array($productos) == false)

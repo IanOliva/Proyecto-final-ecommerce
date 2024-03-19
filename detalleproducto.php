@@ -99,13 +99,13 @@ $path = "admin/" . $rowProducto['imagenes'];
 
 
                         <i class="fas fa-cart-plus fa-lg mr-2"></i>
-                        Add to Cart
+                        Añadir al carrito
                     </button>
                 </div>
 
                 <div class="mt-4">
                     <p>Cantidad</p>
-                    <input type="number" class="form-control" id="cantidadProducto" value="1">
+                    <input type="number" class="form-control" id="cantidadProducto" value="1" max="<?php echo $rowProducto['stock'] ?>">
                 </div>
 
 

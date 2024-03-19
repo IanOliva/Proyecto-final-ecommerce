@@ -1,5 +1,3 @@
-<!-- eliminar un producto específico de la lista de productos almacenada en una cookie llamada "productos". Luego, se
-devuelve la lista de productos actualizada en formato JSON. -->
 <?php
 $productos = unserialize($_COOKIE['productos']);
 foreach ($productos as $key => $value) {
