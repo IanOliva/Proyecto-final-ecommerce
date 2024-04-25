@@ -29,7 +29,9 @@ $rowVenta = mysqli_fetch_assoc($resVenta);
 
 ?>
 
-<?php ob_start(); ?>
+<?php 
+ob_start(); 
+?>
 <!doctype html>
 <html>
 
@@ -141,9 +143,9 @@ $rowVenta = mysqli_fetch_assoc($resVenta);
                 <td colspan="2">
                     <table>
                         <tr>
-                            <td class="title">
+                            <!-- <td class="title">
                                 <img src="{{ url('admin/imageness/logo ian.png') }}" style="width:100%; max-width:100px;">
-                            </td>
+                            </td> -->
 
                             <td>
                                 <strong>ID:</strong>
@@ -163,7 +165,8 @@ $rowVenta = mysqli_fetch_assoc($resVenta);
                             <td>
                                 Ecommerce<br>
                                 Buenos Aires, Arg<br>
-                                Sunnyville, CA 12345
+                                Sunnyville, CA 12345 <br>
+                                <strong>CVU:</strong>22167232617231762
                             </td>
 
                             <td>
@@ -239,13 +242,14 @@ $rowVenta = mysqli_fetch_assoc($resVenta);
 
 </html>
 
-<?php $html=ob_get_clean(); ?>
+<?php
+ $html=ob_get_clean(); ?>
 <?php
 include_once"dompdf/autoload.inc.php"; 
 use Dompdf\Dompdf;
 $pdf=new Dompdf();
 $pdf->loadhtml($html);
-$pdf->setPaper("A4","landingscape");
+$pdf->setPaper("A4","landscape");
 $pdf->render();
 $pdf->stream("Factura");
 
